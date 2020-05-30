@@ -2,6 +2,11 @@ image: golang:1.9
 
 before_script:
   - git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
+  - apk add --update openssh-client bash
+  - eval $(ssh-agent -s)
+  - bash -c 'ssh-add <(echo "$SSH_PRIVATE_KEY")'
+  - mkdir ~/.ssh
+  - ssh-keyscan -t rsa devsb01 >> ~/.ssh/known_hosts
   - git remote set-url origin git@gitlab.com/ghanesh.balaji1995/DockerDeployTest.git
   - mkdir -p /go/src/gitlab.com/dockerdeploytest /go/src/_/builds
   - cp -r $CI_PROJECT_DIR /go/src/gitlab.com/dockerdeploytest
