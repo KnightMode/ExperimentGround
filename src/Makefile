@@ -10,4 +10,4 @@ logs:
 build:
 	go build -o ./web && ./web
 dep:
-	go mod download
+	go get -v
