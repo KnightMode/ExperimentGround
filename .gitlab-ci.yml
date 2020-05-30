@@ -2,7 +2,6 @@ image: alphine:3.7
 
 cache:
   paths:
-    - /apt-cache
     - /go/src/github.com
     - /go/src/golang.org
     - /go/src/google.golang.org
