@@ -1,12 +1,9 @@
 image: golang:1.9
 
-variables:
-  PACKAGE_PATH: go/src/gitlab.com/ghanesh.balaji1995/dockerdeploytest
-
 before_script:
-  - mkdir -p /go/src/gitlab.com/ghanesh.balaji1995/dockerdeploytest /go/src/_/builds
+  - mkdir -p /go/src/gitlab.com/ghanesh.balaji1995 /go/src/_/builds
   - cp -r $CI_PROJECT_DIR /go/src/ghanesh.balaji1995/dockerdeploytest
-  - ln -s /go/src/gitlab.com/ghanesh.balaji1995/dockerdeploytest /go/src/_/builds/ghanesh.balaji1995
+  - ln -s /go/src/gitlab.com/ghanesh.balaji1995 /go/src/_/builds/ghanesh.balaji1995
 
 stages:
   - test
