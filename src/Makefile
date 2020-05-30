@@ -7,6 +7,7 @@ stop:
 	docker-compose down
 logs:
 	docker-compose -f ../docker-compose.yml logs -f -t
-
 build:
 	go build -o ./web && ./web
+dep:
+	@go get -v -d ./...
