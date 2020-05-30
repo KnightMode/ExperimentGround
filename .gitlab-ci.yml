@@ -5,8 +5,6 @@ before_script:
   - cp -r $CI_PROJECT_DIR /go/src/gitlab.com/dockerdeploytest/src
   - ls $CI_PROJECT_DIR
   - ln -s /go/src/gitlab.com/dockerdeploytest /go/src/_/builds/dockerdeploytest
-  - cd src
-  - go build
 
 stages:
   - test
