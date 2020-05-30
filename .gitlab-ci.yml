@@ -5,7 +5,8 @@ variables:
 before_script:
   - mkdir -p $PACKAGE_PATH $GOPATH/src/_/builds
   - ls
-  - cp -r $CI_PROJECT_DIR $GOPATH/src/gitlab.com/ghanesh.balaji1995/dockerdeploytest
+  - cp -r $CI_PROJECT_DIR/src $GOPATH/src/gitlab.com/ghanesh.balaji1995/dockerdeploytest
+  - cp go.mod go.sum $GOPATH/src/gitlab.com/ghanesh.balaji1995/dockerdeploytest
   - ln -s $PACKAGE_PATH $GOPATH/src/_/builds/$PACKAGE_PATH
   - go get -v -d ./...
   - apt-get update -qq
