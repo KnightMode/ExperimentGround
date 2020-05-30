@@ -4,7 +4,7 @@ variables:
   PACKAGE_PATH: go/src/gitlab.com/ghanesh.balaji1995/dockerdeploytest
 before_script:
   - mkdir -p $PACKAGE_PATH $GOPATH/src/_/builds
-  - echo $CI_PROJECT_DIR ls
+  - ls
   - cp -r $CI_PROJECT_DIR $GOPATH/src/gitlab.com/ghanesh.balaji1995/dockerdeploytest
   - ln -s $PACKAGE_PATH $GOPATH/src/_/builds/$PACKAGE_PATH
   - go get -v -d ./...
