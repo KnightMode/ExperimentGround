@@ -1,7 +1,6 @@
 image: alphine:3.7
 
 before_script:
-  - git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
   - apt-get update -qq
   - apt-get install -qq git
   - 'which ssh-agent || ( apt-get install -qq openssh-client )'
