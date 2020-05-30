@@ -6,13 +6,13 @@ before_script:
   - cp -r $CI_PROJECT_DIR /go/src/gitlab.com/dockerdeploytest/src
   - ls $CI_PROJECT_DIR
   - ln -s /go/src/gitlab.com/dockerdeploytest /go/src/_/builds/dockerdeploytest
-  - cd src && make dep
   # Setup SSH deploy keys
   - 'which ssh-agent || ( apt-get install -qq openssh-client )'
   - eval $(ssh-agent -s)
   - ssh-add <(echo "$SSH_PRIVATE_KEY")
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  - cd src && make dep
 
 stages:
   - test
