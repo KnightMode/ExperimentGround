@@ -2,7 +2,7 @@ image: golang:1.9
 
 before_script:
   - mkdir -p /go/src/gitlab.com/dockerdeploytest /go/src/_/builds
-  - cp -r $CI_PROJECT_DIR /go/src/gitlab.com/dockerdeploytest
+  - cp -r $CI_PROJECT_DIR /go/src/gitlab.com/dockerdeploytest/src
   - ln -s /go/src/gitlab.com/dockerdeploytest /go/src/_/builds/dockerdeploytest
   - cd src
   - go build
