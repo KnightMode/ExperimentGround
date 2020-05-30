@@ -1,0 +1,44 @@
+image: alphine:3.7
+
+cache:
+  paths:
+    - /apt-cache
+    - /go/src/github.com
+    - /go/src/golang.org
+    - /go/src/google.golang.org
+    - /go/src/gopkg.in
+
+variables:
+  PACKAGE_PATH: /go/src/gitlab.com/hypnoglow/example-go-docker-gitlab
+
+before_script:
+  - mkdir -p $PACKAGE_PATH $GOPATH/src/_/builds
+  - cp -r $CI_PROJECT_DIR $PACKAGE_PATH
+  - ln -s $PACKAGE_PATH $GOPATH/src/_/builds/$PACKAGE_PATH
+  - go get -v -d ./...
+  - apt-get update -qq
+  - apt-get install -qq git
+  # Setup SSH deploy keys
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+stages:
+  - test
+  - build
+
+test:
+  stage: test
+  dependencies:
+    - dep
+  image: golang:1.10-alpine3.7
+  script:
+    - go test ./...
+
+build:
+  image: golang:1.13
+  stage: build
+  script:
+    - go build
