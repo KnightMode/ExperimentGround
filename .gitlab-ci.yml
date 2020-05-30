@@ -1,15 +1,10 @@
 image: golang:1.9
 
 before_script:
-  - git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
   - mkdir -p /go/src/gitlab.com/dockerdeploytest /go/src/_/builds
   - cp -r $CI_PROJECT_DIR /go/src/gitlab.com/dockerdeploytest
   - ls $CI_PROJECT_DIR
   - ln -s /go/src/gitlab.com/dockerdeploytest /go/src/_/builds/dockerdeploytest
-  - eval $(ssh-agent -s)
-  - echo "$SSH_DEPLOY_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-  - mkdir -p ~/.ssh && touch ~/.ssh/known_hosts
-  - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
   - cd src && make dep
 
 stages:
