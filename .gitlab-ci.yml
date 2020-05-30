@@ -31,8 +31,6 @@ stages:
 
 test:
   stage: test
-  dependencies:
-    - dep
   image: golang:1.10-alpine3.7
   script:
     - go test ./...
