@@ -1,0 +1,10 @@
+server:
+  port: 332
+
+database:
+  dbname: some_db
+  dbuser:
+  dbpassword:
+
+EXAMPLE_VAR:
+EXAMPLE_PATH:
