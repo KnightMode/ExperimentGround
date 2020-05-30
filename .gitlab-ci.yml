@@ -1,12 +1,5 @@
 image: alphine:3.7
 
-cache:
-  paths:
-    - /go/src/github.com
-    - /go/src/golang.org
-    - /go/src/google.golang.org
-    - /go/src/gopkg.in
-
 variables:
   PACKAGE_PATH: /go/src/gitlab.com/hypnoglow/example-go-docker-gitlab
 
