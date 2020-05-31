@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/gorilla/mux"
 	"net/http"
 )
 
@@ -33,15 +32,6 @@ type UploadFile struct {
 
 func (fileUploader UploadFile) Health(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"Status": "Working"})
-}
-func router() http.Handler {
-	r := mux.NewRouter()
-	r.Path("/greeting").Methods(http.MethodGet).HandlerFunc(greet)
-	return r
-}
-
-func greet(w http.ResponseWriter, req *http.Request) {
-	_, _ = w.Write([]byte("Hello, world!"))
 }
 
 
