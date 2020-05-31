@@ -55,8 +55,8 @@ publish:
     - docker info
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
   script:
-    - docker build -t BINARY_NAME .
-    - docker tag BINARY_NAME #USERNAME/TAGNAME
+    - docker build -t $BINARY_NAME .
+    - docker tag $BINARY_NAME #USERNAME/TAGNAME
     - docker push #USERNAME/TAGNAME
   only:
     - master
