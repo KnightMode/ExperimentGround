@@ -19,9 +19,6 @@ before_script:
   - ln -s /go/src/gitlab.com/dockerdeploytest $GOPATH/src/_/builds/dockerdeploytest
   - make dep
 
-after_script:
-  - ls
-
 stages:
   - lint
   - test
@@ -58,8 +55,7 @@ publish:
     - docker info
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
   script:
-    - docker build -t BINARY_NAME .
-    - docker tag BINARY_NAME #USERNAME/TAGNAME
-    - docker push #USERNAME/TAGNAME
+    - docker build -t .
+    - docker push shreegb/docker_deploy_test:tagname
   only:
     - master
