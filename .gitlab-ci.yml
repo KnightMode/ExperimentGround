@@ -56,7 +56,7 @@ publish:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
   script:
     - docker build -t $BINARY_NAME .
-    - docker tag $BINARY_NAME #USERNAME/TAGNAME
-    - docker push #USERNAME/TAGNAME
+    - docker tag $BINARY_NAME shreegb/docker_deploy_test
+    - docker push shreegb/docker_deploy_test
   only:
     - master
