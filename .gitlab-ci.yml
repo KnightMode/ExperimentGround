@@ -15,7 +15,7 @@ before_script:
   - cp -r $CI_PROJECT_DIR /go/src/gitlab.com/dockerdeploytest
   - ls $CI_PROJECT_DIR
   - echo $PWD && ls
-  - cd src && make dep
+  - make dep
 
 stages:
   - test
