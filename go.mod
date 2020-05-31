@@ -10,5 +10,4 @@ require (
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/rs/cors v1.7.0
 	github.com/sirupsen/logrus v1.6.0
-	golang.org/x/sys v0.0.0-20200508214444-3aab700007d7 // indirect
 )
