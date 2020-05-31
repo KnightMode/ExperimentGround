@@ -30,7 +30,7 @@ stages:
 lint:
   stage: lint
   image: golang:1.13
-  script: golang.org/x/lint/golint && make lint
+  script: go get -u golang.org/x/lint/golint && make lint
 
 test:
   stage: test
