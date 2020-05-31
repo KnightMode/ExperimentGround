@@ -11,3 +11,6 @@ build:
 	go build -o ./web && ./web
 dep:
 	cd src;go get -v -d;
+
+lint:
+	golint -set_exit_status $(go list ./...)

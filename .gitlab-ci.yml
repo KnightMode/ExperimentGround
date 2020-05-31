@@ -1,6 +1,9 @@
 image: alphine:3.7
+
 variables:
   PACKAGE_PATH: /go/src/gitlab.com/ghanesh.balaji1995/dockerdeploytest
+  PKG := "gitlab.com/ghanesh.balaji1995/dockerdeploytest"
+  PKG_LIST := $(shell go list ${PKG}/...)
 
 before_script:
   - git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
@@ -16,16 +19,20 @@ before_script:
   - mkdir -p /go/src/gitlab.com/dockerdeploytest /go/src/_/builds
   - cp -r ${CI_PROJECT_DIR} /go/src/gitlab.com/dockerdeploytest
   - ln -s /go/src/gitlab.com/dockerdeploytest $GOPATH/src/_/builds/dockerdeploytest
-  - ls $CI_PROJECT_DIR
-  - echo $PWD && ls
   - make dep
 
 after_script:
   - ls
 
 stages:
+  - lint
   - test
   - build
+
+lint:
+  stage: lint
+  image: golang:1.13
+  script: make lint
 
 test:
   stage: test

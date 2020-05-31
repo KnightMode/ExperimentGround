@@ -7,6 +7,7 @@ import (
 
 type UploadFile struct {
 }
+
 //
 //func (fileUploader UploadFile) UploadSingleFile(ctx *gin.Context) {
 //	request := ctx.Request
@@ -34,8 +35,6 @@ func (fileUploader UploadFile) Health(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"Status": "Working"})
 }
 
-
 func NewFileUploader() UploadFile {
 	return UploadFile{}
 }
-
