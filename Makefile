@@ -1,3 +1,5 @@
+PKG_LIST := $(shell go list ./...)
+
 start:
 	@echo "Starting database...."
 	docker-compose -f ../docker-compose.yml up -d
@@ -13,4 +15,4 @@ dep:
 	cd src;go get -v -d;
 
 lint:
-	golint -set_exit_status $(go list ./...)
+	@golint -set_exit_status ${PKG_LIST}
