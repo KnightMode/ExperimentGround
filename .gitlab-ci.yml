@@ -13,7 +13,7 @@ before_script:
   - mkdir -p /go/src/gitlab.com/dockerdeploytest /go/src/_/builds
   - cp -r $CI_PROJECT_DIR /go/src/gitlab.com/dockerdeploytest
   - ls $CI_PROJECT_DIR
-  - ln -s /go/src/gitlab.com/dockerdeploytest /go/src/_/builds/dockerdeploytest
+  - ln -s /go/src/gitlab.com/dockerdeploytest/src /go/src/_/builds/dockerdeploytest
   - cd src && make dep
 
 stages:
