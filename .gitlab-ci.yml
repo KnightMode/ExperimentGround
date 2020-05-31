@@ -20,6 +20,9 @@ before_script:
   - echo $PWD && ls
   - make dep
 
+after_script:
+  - ls
+
 stages:
   - test
   - build
@@ -34,8 +37,8 @@ build:
   image: golang:1.13
   stage: build
   script:
-    - cd src && go build && ls
+    - cd src && go build -o ./out/broom
   artifacts:
     paths:
-      - build/
+      - out/
     expire_in: 1 week
