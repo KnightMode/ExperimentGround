@@ -26,6 +26,7 @@ stages:
   - lint
   - test
   - build
+  - publish
 
 lint:
   stage: lint
