@@ -40,5 +40,5 @@ build:
     - cd src && go build -o ./out/broom
   artifacts:
     paths:
-      - out/
+      - src/out/
     expire_in: 1 week
