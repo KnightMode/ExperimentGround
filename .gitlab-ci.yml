@@ -34,4 +34,4 @@ build:
   image: golang:1.13
   stage: build
   script:
-    - go build
+    - cd src && go build
