@@ -37,7 +37,7 @@ build:
   image: golang:1.13
   stage: build
   script:
-    - cd src && go build -o ./out/broom
+    - cd src && go build -o ./out/outputFile
   artifacts:
     paths:
       - src/out/
