@@ -26,12 +26,12 @@ stages:
 
 test:
   stage: test
-  image: golang:1.9
+  image: golang:1.13
   script:
     - go test ./...
 
 build:
-  image: golang:1.9
+  image: golang:1.13
   stage: build
   script:
     - go build
