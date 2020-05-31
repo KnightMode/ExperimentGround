@@ -21,6 +21,5 @@ func registerRoutes() {
 
 func routeUploader(router *gin.Engine) {
 	controller := NewFileUploader()
-	router.POST("/ping", controller.UploadSingleFile)
 	router.GET("/health", controller.Health)
 }

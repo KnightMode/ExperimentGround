@@ -2,8 +2,8 @@ package main
 
 import (
 	"net/http"
-"net/http/httptest"
-"testing"
+	"net/http/httptest"
+	"testing"
 )
 
 func TestRouter(t *testing.T) {
