@@ -63,6 +63,7 @@ publish:
     - master
 
 deploy:
+  image: docker:latest
   stage: deploy
   services:
     - docker:dind
