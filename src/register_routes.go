@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	cors "github.com/rs/cors/wrapper/gin"
 	log "github.com/sirupsen/logrus"
-	fileController "gitlab.com/DockerDeployTest/src/controller"
 	"os"
 )
 
@@ -21,7 +20,7 @@ func registerRoutes() {
 }
 
 func routeUploader(router *gin.Engine) {
-	controller := fileController.NewFileUploader()
+	controller := NewFileUploader()
 	router.POST("/ping", controller.UploadSingleFile)
 	router.GET("/health", controller.Health)
 }
