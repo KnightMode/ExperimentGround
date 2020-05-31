@@ -2,8 +2,6 @@ image: alphine:3.7
 
 variables:
   PACKAGE_PATH: /go/src/gitlab.com/ghanesh.balaji1995/dockerdeploytest
-  PKG := "gitlab.com/ghanesh.balaji1995/dockerdeploytest"
-  PKG_LIST := $(shell go list ${PKG}/...)
 
 before_script:
   - git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
