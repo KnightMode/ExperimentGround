@@ -36,7 +36,6 @@ before_script:
   - mkdir -p /go/src/gitlab.com/dockerdeploytest /go/src/_/builds
   - cp -r ${CI_PROJECT_DIR} /go/src/gitlab.com/dockerdeploytest
   - ln -s /go/src/gitlab.com/dockerdeploytest $GOPATH/src/_/builds/dockerdeploytest
-  - go get -u golang.org/x/lint/golint
   - make dep
 
 stages:
@@ -49,7 +48,9 @@ lint:
   stage: lint
   extends: .go-cache
   image: golang:1.13
-  script: make lint
+  before_script:
+    - go get -u golang.org/x/lint/golint
+  script:  make lint
 
 test:
   stage: test
