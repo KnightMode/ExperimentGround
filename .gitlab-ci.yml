@@ -29,6 +29,6 @@ deploy:
   script:
     - docker pull shreegb/docker_deploy_test:latest
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-    - docker tag shreegb/docker_deploy_test registry.heroku.com/dockerdeploytest/sleepy-chamber-71815:latest
-    - docker push registry.heroku.com/dockerdeploytest/sleepy-chamber-71815:latest
+    - docker tag shreegb/docker_deploy_test registry.heroku.com/sleepy-chamber-71815:latest
+    - docker push registry.heroku.com/sleepy-chamber-71815:latest
     - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web --app myapp
