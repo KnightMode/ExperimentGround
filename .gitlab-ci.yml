@@ -3,8 +3,14 @@ image: alphine:3.7
 variables:
   PACKAGE_PATH: /go/src/gitlab.com/ghanesh.balaji1995/dockerdeploytest
 
-cache:
+cache: &global_cache
   key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - /apt-cache
+    - /go/src/github.com
+    - /go/src/golang.org
+    - /go/src/google.golang.org
+    - /go/src/gopkg.in
 
 before_script:
   - git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
