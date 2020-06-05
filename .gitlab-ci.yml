@@ -32,4 +32,5 @@ deploy:
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
     - docker tag shreegb/docker_deploy_test registry.heroku.com/sleepy-chamber-71815:latest
     - docker push registry.heroku.com/sleepy-chamber-71815:latest
+    - npm install -g heroku
     - heroku container:release web -a sleepy-chamber-71815 .
