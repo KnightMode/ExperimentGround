@@ -41,4 +41,4 @@ deploy_to_heroku:
   script:
     - npm install -g heroku docker
     - heroku container:login
-    - heroku container:release web --app sleepy-chamber-71815 .
+    - heroku container:release web
