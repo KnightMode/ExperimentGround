@@ -22,5 +22,6 @@ func registerRoutes() {
 
 func routeUploader(router *gin.Engine) {
 	controller := controller2.NewFileUploader()
+	router.POST("/upload", controller.UploadSingleFile)
 	router.GET("/health", controller.Health)
 }

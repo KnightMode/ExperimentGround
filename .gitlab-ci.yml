@@ -48,8 +48,6 @@ lint:
   stage: lint
   extends: .go-cache
   image: golang:1.13
-  before_script:
-    - go get -u golang.org/x/lint/golint
   script:  echo lint to be fixed
 
 test:
