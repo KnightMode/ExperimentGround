@@ -65,7 +65,7 @@ publish:
 
 deploy:
   image: node:latest
-  stage: heroku
+  stage: deploy
   services:
     - docker:dind
   script:
