@@ -14,26 +14,56 @@ before_script:
   - ssh-keyscan -t rsa devsb01 >> ~/.ssh/known_hosts
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   - git remote set-url origin git@gitlab.com/ghanesh.balaji1995/DockerDeployTest.git
+  - mkdir -p /go/src/gitlab.com/dockerdeploytest /go/src/_/builds
+  - cp -r ${CI_PROJECT_DIR} /go/src/gitlab.com/dockerdeploytest
+  - ln -s /go/src/gitlab.com/dockerdeploytest $GOPATH/src/_/builds/dockerdeploytest
+  - make dep
 
 stages:
-#  - deploy
-  - heroku
-#
-#deploy:
-#  image: docker:latest
-#  stage: deploy
-#  services:
-#    - docker:dind
-#  before_script:
-#    - docker info
-#    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-#  script:
-#    - docker pull shreegb/docker_deploy_test:latest
-#    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-#    - docker tag shreegb/docker_deploy_test registry.heroku.com/sleepy-chamber-71815:latest
-#    - docker push registry.heroku.com/sleepy-chamber-71815:latest
+  - lint
+  - test
+  - build
+  - publish
+  - deploy
 
-deploy_to_heroku:
+lint:
+  stage: lint
+  image: golang:1.13
+  script: go get -u golang.org/x/lint/golint && make lint
+
+test:
+  stage: test
+  image: golang:1.13
+  script:
+    - go test ./...
+
+build:
+  image: golang:1.13
+  stage: build
+  script:
+    - cd src && go build -o ./out/outputFile
+  artifacts:
+    paths:
+      - src/out/
+    expire_in: 1 week
+
+publish:
+  image: docker:latest
+  stage: publish
+  services:
+    - docker:dind
+  before_script:
+    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+  script:
+    - docker build -t $BINARY_NAME .
+    - docker tag $BINARY_NAME shreegb/docker_deploy_test
+    - docker tag shreegb/docker_deploy_test registry.heroku.com/sgbapp/web
+    - docker push registry.heroku.com/sgbapp/web
+  only:
+    - master
+
+deploy:
   image: node:latest
   stage: heroku
   services:
@@ -41,4 +71,4 @@ deploy_to_heroku:
   script:
     - npm install -g heroku docker
     - heroku container:login
-    - heroku container:release web -a sleepy-chamber-71815
+    - heroku container:release web -a sgbapp
