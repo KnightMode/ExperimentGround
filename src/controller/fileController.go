@@ -22,7 +22,7 @@ func (fileUploader UploadFile) UploadSingleFile(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, gin.H{})
 		return
 	}
-	f, err := os.OpenFile("uploadData/"+handler.Filename, os.O_CREATE|os.O_RDWR|os.O_WRONLY|os.O_APPEND, 0666)
+	f, err := os.OpenFile("uploadData/"+handler.Filename, os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		log.Error("Error Opening the File", err)
 		ctx.JSON(http.StatusInternalServerError, gin.H{})
