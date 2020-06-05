@@ -20,50 +20,10 @@ before_script:
   - make dep
 
 stages:
-  - lint
-  - test
-  - build
-  - publish
-  - staging
   - deploy
 
-lint:
-  stage: lint
-  image: golang:1.13
-  script: go get -u golang.org/x/lint/golint && make lint
-
-test:
-  stage: test
-  image: golang:1.13
-  script:
-    - go test ./...
-
-build:
-  image: golang:1.13
-  stage: build
-  script:
-    - cd src && go build -o ./out/outputFile
-  artifacts:
-    paths:
-      - src/out/
-    expire_in: 1 week
-
-publish:
-  image: docker:latest
-  stage: publish
-  services:
-    - docker:dind
-  before_script:
-    - docker info
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-  script:
-    - docker build -t $BINARY_NAME .
-    - docker tag $BINARY_NAME shreegb/docker_deploy_test
-    - docker push shreegb/docker_deploy_test
-  only:
-    - master
-
 staging:
+  image: ruby:latest
   stage: deploy
   script:
     - apt-get update -yq
@@ -72,18 +32,3 @@ staging:
     - dpl --provider=heroku --app=sleepy-chamber-71815 --api-key=$HEROKU_API_TOKEN
   only:
     - master
-
-deploy:
-  image: docker:latest
-  stage: deploy
-  services:
-    - docker:dind
-  before_script:
-    - docker info
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-  script:
-    - docker pull shreegb/docker_deploy_test:latest
-    - docker login --username=_ --password=$AUTH_TOKEN registry.heroku.com
-    - docker tag shreegb/docker_deploy_test registry.heroku.com/sleepy-chamber-71815/myapp:latest
-    - docker push registry.heroku.com/sleepy-chamber-71815/myapp:latest
-    - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web --app myapp
