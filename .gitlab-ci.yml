@@ -24,6 +24,7 @@ stages:
   - test
   - build
   - publish
+  - staging
   - deploy
 
 lint:
@@ -59,6 +60,16 @@ publish:
     - docker build -t $BINARY_NAME .
     - docker tag $BINARY_NAME shreegb/docker_deploy_test
     - docker push shreegb/docker_deploy_test
+  only:
+    - master
+
+staging:
+  stage: deploy
+  script:
+    - apt-get update -yq
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=sleepy-chamber-71815 --api-key=$HEROKU_API_TOKEN
   only:
     - master
 
