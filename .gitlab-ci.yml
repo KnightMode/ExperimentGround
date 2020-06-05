@@ -25,7 +25,6 @@ before_script:
 stages:
   - lint
   - test
-  - build
   - publish
   - deploy
 
@@ -41,18 +40,6 @@ test:
     - echo testing
   script:
     - go test ./...
-
-build:
-  image: golang:1.13
-  stage: build
-  before_script:
-    - echo build
-  script:
-    - cd src && go build -o ./out/outputFile
-  artifacts:
-    paths:
-      - src/out/
-    expire_in: 1 week
 
 publish:
   image: docker:latest
