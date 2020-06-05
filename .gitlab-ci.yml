@@ -75,4 +75,4 @@ deploy:
     - docker login --username=_ --password=$AUTH_TOKEN registry.heroku.com
     - docker tag shreegb/docker_deploy_test registry.heroku.com/sleepy-chamber-71815/myapp:latest
     - docker push registry.heroku.com/sleepy-chamber-71815/myapp:latest
-    - docker run --rm -e HEROKU_API_KEY=$AUTH_TOKEN wingrunr21/alpine-heroku-cli container:release web --app myapp
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web --app myapp
