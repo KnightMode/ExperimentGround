@@ -37,7 +37,7 @@ func (fileUploader UploadFile) UploadSingleFile(ctx *gin.Context) {
 
 //Health TODO: Fix Lint Error
 func (fileUploader UploadFile) Health(context *gin.Context) {
-	context.JSON(http.StatusOK, gin.H{"Status": "Working"})
+	context.JSON(http.StatusOK, gin.H{"Status": "Healthy"})
 }
 
 //NewFileUploader TODO: Fix Lint Error
