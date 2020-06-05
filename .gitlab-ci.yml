@@ -39,6 +39,6 @@ deploy_to_heroku:
   services:
     - docker:dind
   script:
-    - npm install -g heroku
+    - npm install -g heroku docker
     - heroku container:login
     - heroku container:release web --app sleepy-chamber-71815
