@@ -17,6 +17,7 @@ before_script:
 
 stages:
   - deploy
+  - heroku
 
 deploy:
   image: docker:latest
@@ -31,6 +32,15 @@ deploy:
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
     - docker tag shreegb/docker_deploy_test registry.heroku.com/sleepy-chamber-71815:latest
     - docker push registry.heroku.com/sleepy-chamber-71815:latest
-    - npm install -g heroku
+
+deploy_to_heroku:
+  image: node:latest
+  stage: heroku
+  services:
+    - docker:dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
     - heroku container:login
-    - heroku container:release web -a sleepy-chamber-71815 .
+    - npm install -g heroku
+    - heroku container:release web --app sleepy-chamber-71815
