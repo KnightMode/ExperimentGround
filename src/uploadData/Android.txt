@@ -1,0 +1,24 @@
+1) Android Basics -> Google Developer website
+2) RxJava brush up
+3) Retrofit, Glide/Picasso depth 
+4) Lifecycle component Implementation, DataBinding 
+5) RoomDb deep dive
+6) LiveData, SharedPreferences
+7) Fragments Deep Dive
+8) Kotlin Coroutines https://proandroiddev.com/how-to-make-sense-of-kotlin-coroutines-b666c7151b93
+
+9) Design Patterns
+10) DRY, KISS, YAGNI
+11) SQL basics,queries
+
+I had 10 Android interviews during the last two years, here’s the questions plus some lessons I’ve…
+https://android.jlelse.eu/i-had-10-android-interviews-during-the-last-two-years-heres-the-questions-plus-some-lessons-i-ve-cdc583dfbc65
+
+DataStructures....In Depth of each one
+
+DB Design FreeCode Camp
+https://www.calebcurry.com/freecodecamp-database-design-full-course/
+
+
+Android Cheat Sheet Interview Prep
+https://android.jlelse.eu/android-interview-questions-cheat-sheet-96ea01c88def

@@ -24,6 +24,7 @@ func (fileUploader UploadFile) UploadSingleFile(ctx *gin.Context) {
 	}
 	f, err := os.OpenFile("uploadData/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 	if err != nil {
+		log.Error("Error Opening the File", err)
 		ctx.JSON(http.StatusInternalServerError, gin.H{})
 		return
 	}
