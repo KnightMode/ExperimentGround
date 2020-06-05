@@ -56,8 +56,6 @@ test:
   stage: test
   extends: .go-cache
   image: golang:1.13
-  cache:
-    <<: *global_cache
   before_script:
     - echo testing
   script:
