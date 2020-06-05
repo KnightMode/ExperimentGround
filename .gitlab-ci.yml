@@ -11,6 +11,16 @@ cache: &global_cache
     - $GOPATH/src/golang.org
     - $GOPATH/src/google.golang.org
     - $GOPATH/src/gopkg.in
+    - .npm/
+
+.go-cache:
+  variables:
+    GOPATH: $CI_PROJECT_DIR/.go
+  before_script:
+    - mkdir -p .go
+  cache:
+    paths:
+      - .go/pkg/mod/
 
 before_script:
   - git config --global url."git@gitlab.com:".insteadOf "https://gitlab.com/"
@@ -36,14 +46,16 @@ stages:
 
 lint:
   stage: lint
-  <<: *global_cache
+  extends: .go-cache
   image: golang:1.13
   script: go get -u golang.org/x/lint/golint && make lint
 
 test:
   stage: test
-  <<: *global_cache
+  extends: .go-cache
   image: golang:1.13
+  cache:
+    <<: *global_cache
   before_script:
     - echo testing
   script:
@@ -51,7 +63,6 @@ test:
 
 publish:
   image: docker:latest
-  <<: *global_cache
   stage: publish
   services:
     - docker:dind
@@ -69,7 +80,8 @@ publish:
 
 deploy:
   image: node:latest
-  <<: *global_cache
+  cache:
+    <<: *global_cache
   stage: deploy
   before_script:
     - echo hello
