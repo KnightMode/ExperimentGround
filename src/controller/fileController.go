@@ -20,6 +20,7 @@ func (fileUploader UploadFile) UploadSingleFile(ctx *gin.Context) {
 		log.Error("Error Retrieving the File")
 		log.Error(err)
 		ctx.JSON(http.StatusInternalServerError, gin.H{})
+		return
 	}
 	f, err := os.OpenFile("uploadData/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 	if err != nil {
@@ -33,6 +34,7 @@ func (fileUploader UploadFile) UploadSingleFile(ctx *gin.Context) {
 		"Filesize": handler.Size,
 	}).Info("File Uploaded Successfully")
 	ctx.JSON(200, gin.H{"home": "sweet home"})
+	return
 }
 
 //Health TODO: Fix Lint Error
