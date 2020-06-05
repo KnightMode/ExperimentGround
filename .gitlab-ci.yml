@@ -58,6 +58,7 @@ publish:
   script:
     - docker build -t $BINARY_NAME .
     - docker tag $BINARY_NAME shreegb/docker_deploy_test
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
     - docker tag shreegb/docker_deploy_test registry.heroku.com/sgbapp/web
     - docker push registry.heroku.com/sgbapp/web
   only:
