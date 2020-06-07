@@ -77,12 +77,12 @@ publish:
     - master
 
 deploy:
-  image: node:latest
+  image: docker:latest
   cache:
     <<: *global_cache
   stage: deploy
   before_script:
-      - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
   services:
     - docker:dind
   script:
