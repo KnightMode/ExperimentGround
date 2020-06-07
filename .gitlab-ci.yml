@@ -28,8 +28,8 @@ before_script:
   - apt-get install -qq git
   - 'which ssh-agent || ( apt-get install -qq openssh-client )'
   - eval $(ssh-agent -s)
-  - ssh-add <(echo "$SSH_PRIVATE_KEY")
-  - mkdir ~/.ssh
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\\r' | ssh-add - > /dev/null
+  - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
   - ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
   - chmod 644 ~/.ssh/known_hosts
@@ -78,15 +78,24 @@ publish:
 
 deploy:
   image: docker:latest
-  cache:
-    <<: *global_cache
   stage: deploy
   before_script:
+    # Check for ssh-agent + rsync and install if not present
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
+    - "which rsync || ( apt-get update -y && apt-get install rsync -y )"
+    - eval $(ssh-agent -s)
+    # Inject the remote's private key
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    # Append keyscan output into known hosts
+    - ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
   services:
     - docker:dind
   script:
-    - ssh -t $SERVER_USER@$SERVER_IP
+    - ssh -v $SERVER_USER@$SERVER_IP
     - mkdir -p app && cd $
     - docker pull shreegb/docker_deploy_test
     - docker container run -p 8080:8080 -d shreegb/docker_deploy_test
