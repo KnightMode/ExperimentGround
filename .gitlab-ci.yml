@@ -77,7 +77,7 @@ publish:
     - master
 
 deploy:
-  image: alphine:3.7
+  image: golang:1.13
   stage: deploy
   before_script:
     - apk add docker
