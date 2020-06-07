@@ -86,7 +86,7 @@ deploy:
   services:
     - docker:dind
   script:
-    - ssh $SERVER_USER@SERVER_IP
+    - ssh -t $SERVER_USER@$SERVER_IP
     - mkdir -p app && cd $
     - docker pull shreegb/docker_deploy_test
     - docker container run -p 8080:8080 -d shreegb/docker_deploy_test
