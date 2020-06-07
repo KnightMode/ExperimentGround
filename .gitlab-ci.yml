@@ -92,6 +92,6 @@ deploy:
     - docker:dind
   script:
     - ssh -v -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP
-    - mkdir -p app && cd $
+    - mkdir -p app && cd $_
     - docker pull shreegb/docker_deploy_test
     - docker container run -p 8080:8080 -d shreegb/docker_deploy_test
