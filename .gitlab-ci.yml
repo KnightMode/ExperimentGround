@@ -91,5 +91,5 @@ deploy:
     - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
     - 'which rsync || ( apt-get update -y && apt-get install rsync -y )'
   script:
-    - rsync -e "ssh -o StrictHostKeyChecking=no" -avuz --exclude=".*" deploy.sh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP:/home/shreeghanesh
+    - rsync -e "ssh -o StrictHostKeyChecking=no" -avuz --exclude=".*" deploy.sh $SERVER_USER@$SERVER_IP:/home/shreeghanesh
     - ssh -v -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP 'sh deploy.sh'
