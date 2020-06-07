@@ -92,4 +92,4 @@ deploy:
     - 'which rsync || ( apt-get update -y && apt-get install rsync -y )'
   script:
     - rsync -e "ssh -o StrictHostKeyChecking=no" -avuz --exclude=".*" deploy.sh $SERVER_USER@$SERVER_IP:/home/shreeghanesh
-    - ssh -v -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP 'sh deploy.sh'
+    - ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP 'sh deploy.sh'
