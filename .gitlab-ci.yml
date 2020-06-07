@@ -77,9 +77,10 @@ publish:
     - master
 
 deploy:
-  image: docker:latest
+  image: alphine:3.7
   stage: deploy
   before_script:
+    - apk add docker
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     - mkdir -p ~/.ssh
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
@@ -89,8 +90,6 @@ deploy:
     - ssh-add ~/.ssh/id_rsa
     - ssh-keyscan -H 'gitlab.com' >> ~/.ssh/known_hosts
     - 'which rsync || (yum install rsync)'
-  services:
-    - docker:dind
   script:
     - rsync -avuz --exclude=".*" deploy.sh $SERVER_USER@$SERVER_IP:/home/shreeghanesh
     - ssh -v -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP 'sh deploy.sh'
