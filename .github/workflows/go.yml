@@ -33,7 +33,7 @@ jobs:
     - name: Build
       run: |
         cd src
-        go build -v -o ./out/dockerdeploytest
+        GOARCH=amd64 GOOS=darwin go build -v -o ./out/dockerdeploytest
 
     - name: Upload Binary
       uses: actions/upload-artifact@v1
