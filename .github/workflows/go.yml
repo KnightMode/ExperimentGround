@@ -37,10 +37,10 @@ jobs:
         go build -v -o ./out/dockerdeploytest
 
     - name: Upload Binary
-        uses: actions/upload-artifact@v1
-        with:
-          name: dockerdeploytest
-          path: out
+      uses: actions/upload-artifact@v1
+      with:
+        name: dockerdeploytest
+        path: out
 
     - name: Test
       run: |
