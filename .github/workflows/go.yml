@@ -40,7 +40,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: dockerdeploytest
-        path: out
+        path: src/out
 
     - name: Test
       run: |
