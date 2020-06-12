@@ -32,7 +32,6 @@ jobs:
 
     - name: Build
       run: |
-        ls
         cd src
         go build -v -o ./out/dockerdeploytest
 
