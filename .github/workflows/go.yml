@@ -43,11 +43,11 @@ jobs:
   publish:
       name: Build and push Docker images
       runs-on: ubuntu-latest
+      inputs:
+        dockerfile: src/
       steps:
         - name: Build from Dockerfile
           uses: docker/build-push-action@v1.1.0
-          inputs:
-            dockerfile: src/
           with:
             username: ${{ secrets.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_PASSWORD }}
