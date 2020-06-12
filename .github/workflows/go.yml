@@ -34,7 +34,7 @@ jobs:
       run: |
         ls
         cd src
-        go build -v -o ./out/dockerdeploytest && ./dockerdeploytest
+        go build -v -o ./out/dockerdeploytest
 
     - name: Upload Binary
       uses: actions/upload-artifact@v1
