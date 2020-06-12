@@ -32,6 +32,7 @@ jobs:
 
     - name: Build
       run: |
+        echo $ls
         cd src
         go build -v .
 
