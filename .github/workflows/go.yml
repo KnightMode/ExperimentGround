@@ -42,6 +42,7 @@ jobs:
 
   publish:
       name: Build and push Docker images
+      runs-on: ubuntu-latest
       steps:
         - name: Build from Dockerfile
           uses: docker/build-push-action@v1.1.0
