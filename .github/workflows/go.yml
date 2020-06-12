@@ -52,5 +52,6 @@ jobs:
             repository: shreegb/docker_deploy_test
             tag_with_ref: true
             tag_with_sha: true
+          run: cd src
 
 
