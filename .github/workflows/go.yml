@@ -32,8 +32,8 @@ jobs:
 
     - name: Build
       run: |
-      cd src
-      go build -v .
+        cd src
+        go build -v .
 
     - name: Test
       run: |
