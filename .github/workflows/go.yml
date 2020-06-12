@@ -35,7 +35,7 @@ jobs:
         cd src
         GOARCH=amd64 GOOS=darwin go build -v -o ./out/dockerdeploytest
         cd out
-        ./dockerdeploytest
+        chmod +x dockerdeploytest
 
     - name: Upload Binary
       uses: actions/upload-artifact@v1
